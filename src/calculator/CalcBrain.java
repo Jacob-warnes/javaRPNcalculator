@@ -9,16 +9,22 @@ package calculator;
  *
  * @author C0381953
  */
+import java.util.Stack;
 public class CalcBrain implements Calculations {
-   /**
+    /**
      * A single digit from the UI.
      * 
      * @param digit an integer
      * @return The result to display.
      */
+    private Stack fun;
+    private String op;
+    public CalcBrain(){
+        fun = new Stack();
+        op = "";
+    }
     @Override
     public String digit(String digit){
-     
         return digit;
     }
     /**
@@ -28,8 +34,8 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String operator( String op){
-     
-        return null;
+ 
+        return op;
     }
     /**
      * The ClearEntry button on the UI has been pressed
@@ -39,9 +45,10 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String clearEntry(){
-      
-        return null;
+        fun = new Stack();
+        return "";
     }
+   
     /**
      * The Clear button on the UI has been pressed
      * so all memory in the calculator is cleared.
@@ -50,8 +57,9 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String clear(){
-        
-        return null;
+        op = "";
+        fun = new Stack();
+        return "";
     }
     /**
      * The Enter button on the UI has been pressed.
@@ -59,18 +67,16 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String enterPressed(){
-        
-        return null;
+        return " ";
     }
+ 
     /**
      * A decimal point on the UI has been pressed.
      * @return A message to display.
      */
     @Override
     public String addDecimal(){
-        
-        
-        return null;
+        return ".";
     }
     /**
      * The operand sign on the UI is toggled to negative.
