@@ -17,10 +17,10 @@ public class CalcBrain implements Calculations {
      * @param digit an integer
      * @return The result to display.
      */
-    private Stack fun;
+    private Stack <Float> fun;
     private String op;
     public CalcBrain(){
-        fun = new Stack();
+        fun = new Stack<Float>();
         op = "";
     }
     @Override
@@ -34,8 +34,28 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String operator( String op){
- 
+        String[] splited = op.split(" ");
+        this.op = splited[0];
+        ontoStack(splited);
+        op = calculate();
         return op;
+    }
+    private String calculate( ){
+        Float calc = 0.f;
+        switch(this.op){
+            case "+":
+                calc = fun.pop() + fun.pop();
+                fun.push(calc);
+                return calc.toString();
+            default:
+                return calc.toString();
+        }
+        
+    }
+    private void ontoStack(String[] splited){
+        for(int i =1; i< splited.length ; i++){
+            fun.push(Float.parseFloat(splited[i]));
+        }
     }
     /**
      * The ClearEntry button on the UI has been pressed
@@ -46,7 +66,7 @@ public class CalcBrain implements Calculations {
     @Override
     public String clearEntry(){
         fun = new Stack();
-        return "";
+        return "\n Cleared digits";
     }
    
     /**
@@ -59,7 +79,7 @@ public class CalcBrain implements Calculations {
     public String clear(){
         op = "";
         fun = new Stack();
-        return "";
+        return "\n Memory cleared";
     }
     /**
      * The Enter button on the UI has been pressed.
