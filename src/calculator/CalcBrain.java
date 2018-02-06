@@ -23,6 +23,9 @@ public class CalcBrain implements Calculations {
         fun = new Stack();
         op = "";
     }
+    private void emptyOp(){
+        op = "";
+    }
     @Override
     public String digit(String digit){
         op += digit;
@@ -35,11 +38,15 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String operator( String op){
-       if(fun.empty()){
-           return "error no values";
+       if(!this.op.equals("")){ // enterPressed must be called before operator input 
+           return " error no space before operator \n";
+       }
+        if(fun.size() < 2){ // needs two in stack to calculate 
+           return "error no values \n";
        }
         this.op = op;
         calculate();
+        emptyOp();
         return op+" "+fun.peek().toString()+"\n";
     }
     private void calculate( ){
@@ -84,7 +91,7 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String clearEntry(){
-        op = "";
+        emptyOp();
         return "\nCleared digits\n";
     }
    
@@ -96,7 +103,7 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String clear(){
-        op = "";
+        emptyOp();
         fun = new Stack();
         return "\nMemory cleared\n";
     }
@@ -110,7 +117,7 @@ public class CalcBrain implements Calculations {
             return " ";
         }
         fun.push(Float.parseFloat(op));
-        op = "";
+        emptyOp();
         return " ";
     }
    
