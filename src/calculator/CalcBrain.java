@@ -20,11 +20,12 @@ public class CalcBrain implements Calculations {
     private Stack <Float> fun;
     private String op;
     public CalcBrain(){
-        fun = new Stack<Float>();
+        fun = new Stack();
         op = "";
     }
     @Override
     public String digit(String digit){
+        op += digit;
         return digit;
     }
     /**
@@ -34,28 +35,46 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String operator( String op){
-        String[] splited = op.split(" ");
-        this.op = splited[0];
-        ontoStack(splited);
-        op = calculate();
-        return op;
+       if(fun.empty()){
+           return "error no values";
+       }
+        this.op = op;
+        calculate();
+        return op+" "+fun.peek().toString()+"\n";
     }
-    private String calculate( ){
+    private void calculate( ){
         Float calc = 0.f;
         switch(this.op){
             case "+":
                 calc = fun.pop() + fun.pop();
                 fun.push(calc);
-                return calc.toString();
+                break;
+            case "-":
+                calc = fun.pop() + fun.pop();
+                fun.push(calc);
+                break;
+            case "*":
+                calc = fun.pop() * fun.pop();
+                fun.push(calc);
+                break;
+            case "/":
+                calc = fun.pop() / fun.pop();
+                fun.push(calc);
+                break;
+            case "^":
+                calc = toPower(fun.pop(),fun.pop());
+                fun.push(calc);
+                break;
             default:
-                return calc.toString();
-        }
-        
+                fun.push(calc);
+        }        
     }
-    private void ontoStack(String[] splited){
-        for(int i =1; i< splited.length ; i++){
-            fun.push(Float.parseFloat(splited[i]));
+    private float toPower(float base, float power){
+        float holder = 0;
+        for(; 0.f >= power ; power--){
+            base *= base; 
         }
+        return holder;
     }
     /**
      * The ClearEntry button on the UI has been pressed
@@ -65,8 +84,8 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String clearEntry(){
-        fun = new Stack();
-        return "\n Cleared digits";
+        op = "";
+        return "\nCleared digits\n";
     }
    
     /**
@@ -79,7 +98,7 @@ public class CalcBrain implements Calculations {
     public String clear(){
         op = "";
         fun = new Stack();
-        return "\n Memory cleared";
+        return "\nMemory cleared\n";
     }
     /**
      * The Enter button on the UI has been pressed.
@@ -87,15 +106,21 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String enterPressed(){
+        if(op.equals("")){
+            return " ";
+        }
+        fun.push(Float.parseFloat(op));
+        op = "";
         return " ";
     }
- 
+   
     /**
      * A decimal point on the UI has been pressed.
      * @return A message to display.
      */
     @Override
     public String addDecimal(){
+        op +=".";
         return ".";
     }
     /**
