@@ -39,15 +39,15 @@ public class CalcBrain implements Calculations {
     @Override
     public String operator( String op){
        if(!this.op.equals("")){ // enterPressed must be called before operator input 
-           return " error no space before operator \n";
+           return "";
        }
         if(fun.size() < 2){ // needs two in stack to calculate 
-           return "error no values \n";
+           return "";
        }
         this.op = op;
         calculate();
         emptyOp();
-        return op+" "+fun.peek().toString()+"\n";
+        return op+"\n"+fun.peek().toString()+" ";
     }
     private void calculate( ){
         Float calc = 0.f;
@@ -57,7 +57,7 @@ public class CalcBrain implements Calculations {
                 fun.push(calc);
                 break;
             case "-":
-                calc = fun.pop() + fun.pop();
+                calc = fun.pop() - fun.pop();
                 fun.push(calc);
                 break;
             case "*":
@@ -92,7 +92,7 @@ public class CalcBrain implements Calculations {
     @Override
     public String clearEntry(){
         emptyOp();
-        return "\nCleared digits\n";
+        return "\nCleared Digits\n";
     }
    
     /**
@@ -105,7 +105,7 @@ public class CalcBrain implements Calculations {
     public String clear(){
         emptyOp();
         fun = new Stack();
-        return "\nMemory cleared\n";
+        return "\n\nClear All\n";
     }
     /**
      * The Enter button on the UI has been pressed.
@@ -127,6 +127,9 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String addDecimal(){
+       if(op.contains(".")){
+           return "";
+       }
         op +=".";
         return ".";
     }
