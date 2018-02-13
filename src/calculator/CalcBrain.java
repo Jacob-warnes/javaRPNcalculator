@@ -77,11 +77,10 @@ public class CalcBrain implements Calculations {
         }        
     }
     private float toPower(float base, float power){
-        float holder = 0;
         for(; 0.f >= power ; power--){
             base *= base; 
         }
-        return holder;
+        return base;
     }
     /**
      * The ClearEntry button on the UI has been pressed
