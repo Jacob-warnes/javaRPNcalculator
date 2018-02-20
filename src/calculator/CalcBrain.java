@@ -57,7 +57,8 @@ public class CalcBrain implements Calculations {
                 fun.push(calc);
                 break;
             case "-":
-                calc = fun.pop() - fun.pop();
+                calc = fun.pop();
+                calc = fun.pop() - calc;
                 fun.push(calc);
                 break;
             case "*":
@@ -65,7 +66,8 @@ public class CalcBrain implements Calculations {
                 fun.push(calc);
                 break;
             case "/":
-                calc = fun.pop() / fun.pop();
+                calc = fun.pop();
+                calc = fun.pop() /calc;
                 fun.push(calc);
                 break;
             case "^":
@@ -76,11 +78,12 @@ public class CalcBrain implements Calculations {
                 fun.push(calc);
         }        
     }
-    private float toPower(float base, float power){
-        for(; 0.f >= power ; power--){
-            base *= base; 
+    private float toPower(float power, float base){
+        float holder = 1,f;
+        for(; 0.f < power ; power--){
+            holder *= base; 
         }
-        return base;
+        return holder;
     }
     /**
      * The ClearEntry button on the UI has been pressed
