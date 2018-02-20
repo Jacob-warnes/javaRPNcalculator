@@ -64,6 +64,7 @@ public class CalcBrainTest {
         instance.digit(enterFirstDigit);
         instance.enterPressed();
         instance.digit(enterSecondDigit);
+         instance.enterPressed();
         String result = instance.operator(enterOperator);
 
         String expectedResult = " +\n5.0 ";
@@ -87,8 +88,10 @@ public class CalcBrainTest {
         instance.digit(enterSecondDigit);
         instance.enterPressed();
         instance.digit(enterThirdDigit);
+        instance.enterPressed();
         
         String result = instance.operator(enterOperator);
+        instance.enterPressed();
         result = instance.operator(enterOperator);
         
         String expectedResult = " +\n9.0 ";
@@ -112,6 +115,7 @@ public class CalcBrainTest {
         instance.digit(enterSecondDigit);
         instance.enterPressed();
         instance.digit(enterThirdDigit);
+         instance.enterPressed();
         
         String result = instance.operator(enterOperator);
         result = instance.operator(enterOperator);
@@ -137,6 +141,7 @@ public class CalcBrainTest {
         instance.digit(enterFirstDigit);
         instance.enterPressed();
         instance.digit(enterSecondDigit);
+         instance.enterPressed();
         
         String result = instance.operator(enterOperator);
         
@@ -218,9 +223,11 @@ public class CalcBrainTest {
         instance.clearEntry();
         
         instance.digit(enterSecondDigit);
+         instance.enterPressed();
         instance.enterPressed();
         
         instance.digit(enterThirdDigit);
+         instance.enterPressed();
         
         String result = instance.operator(enterOperator);
         
@@ -326,10 +333,13 @@ public class CalcBrainTest {
         instance.digit("2");
         instance.enterPressed();
         instance.digit("4");
+         instance.enterPressed();
         instance.operator("^");
         instance.digit("3");
+         instance.enterPressed();
         instance.operator("-");
         instance.digit("6");
+         instance.enterPressed();
         instance.operator("/");
         
         String result = instance.operator("-");

@@ -18,17 +18,17 @@ public class CalcBrain implements Calculations {
      * @return The result to display.
      */
     private Stack <Float> fun;
-    private String op;
+    private String operand;
     public CalcBrain(){
         fun = new Stack();
-        op = "";
+        operand = "";
     }
     private void emptyOp(){
-        op = "";
+        operand = "";
     }
     @Override
     public String digit(String digit){
-        op += digit;
+        operand += digit;
         return digit;
     }
     /**
@@ -38,20 +38,19 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String operator( String op){
-       if(!this.op.equals("")){ // enterPressed must be called before operator input 
+       if(!operand.equals("")){ // enterPressed must be called before operator input 
            return "";
        }
         if(fun.size() < 2){ // needs two in stack to calculate 
            return "";
        }
-        this.op = op;
-        calculate();
+        calculate(op);
         emptyOp();
-        return op+"\n"+fun.peek().toString()+" ";
+        return " "+op+"\n"+fun.peek().toString()+" ";
     }
-    private void calculate( ){
+    private void calculate(String op ){
         Float calc = 0.f;
-        switch(this.op){
+        switch(op){
             case "+":
                 calc = fun.pop() + fun.pop();
                 fun.push(calc);
@@ -107,7 +106,7 @@ public class CalcBrain implements Calculations {
     public String clear(){
         emptyOp();
         fun = new Stack();
-        return "\n\nClear All\n";
+        return "\nClear All\n";
     }
     /**
      * The Enter button on the UI has been pressed.
@@ -115,10 +114,10 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String enterPressed(){
-        if(op.equals("")){
+        if(operand.equals("")){
             return " ";
         }
-        fun.push(Float.parseFloat(op));
+        fun.push(Float.parseFloat(operand));
         emptyOp();
         return " ";
     }
@@ -129,10 +128,10 @@ public class CalcBrain implements Calculations {
      */
     @Override
     public String addDecimal(){
-       if(op.contains(".")){
+       if(operand.contains(".")){
            return "";
        }
-        op +=".";
+        operand +=".";
         return ".";
     }
     /**
