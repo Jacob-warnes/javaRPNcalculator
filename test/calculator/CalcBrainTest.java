@@ -53,7 +53,47 @@ public class CalcBrainTest {
         // Check that the "3" is returned from CalcBrain's digit method.
         assertEquals(expectedResult, result);        
     }
-    
+     @Test
+    public void myTest() {
+        System.out.println("Testing my test as entered: 2 3+ 5- 8 7+ 2*");
+        String enterFirstDigit = "2";
+        String enterSecondDigit = "3";
+        String enterThirdDigit = "5";
+        String enterFourthDigit = "8";
+        String enterFithDigit = "7";
+          
+        String enterOperator = "+";
+        String enterMinusOperator = "-";
+        String enterMultiplyOperator = "*";
+        Calculations instance = new CalcBrain();
+        instance.digit(enterFirstDigit);
+        instance.enterPressed();
+        instance.digit(enterSecondDigit); 
+        instance.enterPressed();
+        instance.operator(enterOperator);
+        
+        instance.digit(enterThirdDigit);
+        
+        instance.operator(enterMinusOperator);
+        
+         instance.digit(enterFourthDigit);
+         instance.enterPressed();
+        instance.digit(enterFithDigit);
+         instance.operator(enterOperator);
+        
+        instance.enterPressed();
+        instance.digit(enterFirstDigit);
+        
+        
+        String result = instance.operator(enterMultiplyOperator);
+        String expectedResult = " *\n30.0 ";
+        
+        float delta = 0.0f;
+        assertEquals(Float.parseFloat(expectedResult.replaceAll("\\s",""))
+                   , Float.parseFloat(result.replaceAll("\\s",""))
+                    ,delta);        
+    }
+
     @Test
     public void testAddTwoNumbers() {
         System.out.println("Testing addition");
