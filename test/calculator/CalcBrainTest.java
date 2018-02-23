@@ -89,9 +89,9 @@ public class CalcBrainTest {
         String expectedResult = " *\n30.0 ";
         
         float delta = 0.0f;
-        assertEquals(Float.parseFloat(expectedResult.replaceAll("\\s",""))
-                   , Float.parseFloat(result.replaceAll("\\s",""))
-                    ,delta);        
+         assertEquals(Float.parseFloat(expectedResult.replaceAll("^[^\\n]*\\n",""))
+                   , Float.parseFloat(result.replaceAll("^[^\\n]*\\n",""))
+                    ,delta);    
     }
 
     @Test
