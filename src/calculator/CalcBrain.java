@@ -39,7 +39,7 @@ public class CalcBrain implements Calculations {
     @Override
     public String operator( String op){
        if(!operand.equals("")){ // enterPressed must be called before operator input 
-           return "";
+           this.enterPressed();
        }
         if(fun.size() < 2){ // needs two in stack to calculate 
            return "";
